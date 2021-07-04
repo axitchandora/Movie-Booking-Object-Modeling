@@ -6,7 +6,7 @@ import java.util.List;
 public class Screen {
     private final String id;
     private final String name;
-    private List<Seat> seatList;
+    private final List<Seat> seatList;
 
     public Screen(String id, String name) {
         this.id = id;

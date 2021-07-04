@@ -1,11 +1,13 @@
-package com.jnanacetana.entities;
+package com.jnanacetana.moviebooking.entities;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cinema {
     private final String id;
     private final String name;
-    private List<Screen> screenList;
+    private final List<Screen> screenList;
 
     public Cinema(String id, String name) {
         this.id = id;
