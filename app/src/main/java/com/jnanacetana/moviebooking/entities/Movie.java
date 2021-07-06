@@ -1,5 +1,7 @@
 package com.jnanacetana.moviebooking.entities;
 
+import java.util.Objects;
+
 public class Movie {
     private final String id;
     private final String title;
@@ -19,12 +21,21 @@ public class Movie {
         return title;
     }
 
+    public int getDurationInMins() {
+        return durationInMins;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Movie)) return false;
         Movie movie = (Movie) o;
         return getId().equals(movie.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override

@@ -1,4 +1,7 @@
-package com.jnanacetana.entities;
+package com.jnanacetana.moviebooking.entities;
+
+import java.util.Objects;
+
 public class Customer {
     private final String id;
     private final String name;
@@ -24,6 +27,11 @@ public class Customer {
         if (!(o instanceof Customer)) return false;
         Customer customer = (Customer) o;
         return getId().equals(customer.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override

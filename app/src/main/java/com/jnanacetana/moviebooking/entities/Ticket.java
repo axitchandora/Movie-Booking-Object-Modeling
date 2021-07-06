@@ -1,6 +1,7 @@
 package com.jnanacetana.moviebooking.entities;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Ticket {
     private final Integer id;
@@ -23,12 +24,25 @@ public class Ticket {
         return customer.getName();
     }
 
+    public List<Seat> getSeatList() {
+        return seatList;
+    }
+
+    public String getShowId(){
+        return show.getId();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Ticket)) return false;
         Ticket ticket = (Ticket) o;
         return getId().equals(ticket.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override

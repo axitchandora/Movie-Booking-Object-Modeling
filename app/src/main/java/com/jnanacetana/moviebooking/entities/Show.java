@@ -2,7 +2,7 @@ package com.jnanacetana.moviebooking.entities;
 
 
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
 public class Show {
     private final String id;
@@ -11,16 +11,14 @@ public class Show {
     private final Screen screen;
     private final Cinema cinema;
     private final Movie movie;
-    private final List<ShowSeat> showSeatList;
 
-    public Show(String id, Date start, Date end, Screen screen, Cinema cinema, Movie movie, List<ShowSeat> showSeatList) {
+    public Show(String id, Date start, Date end, Screen screen, Cinema cinema, Movie movie) {
         this.id = id;
         this.start = start;
         this.end = end;
         this.screen = screen;
         this.cinema = cinema;
         this.movie = movie;
-        this.showSeatList = showSeatList;
     }
 
     public String getId() {
@@ -47,29 +45,17 @@ public class Show {
         return movie.getTitle();
     }
 
-    public List<ShowSeat> getShowSeatList() {
-        return showSeatList;
-    }
-
-    public boolean checkSeatLocked(String seatId) {
-        ShowSeat showSeat = showSeatList
-                .stream()
-                .filter(seat -> seatId.equals(seat.getId()))
-                .findAny()
-                .orElse(null);
-
-        if (showSeat != null && showSeat.isLocked()) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Show)) return false;
         Show show = (Show) o;
         return getId().equals(show.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override
@@ -81,7 +67,6 @@ public class Show {
                 ", screen=" + screen +
                 ", cinema=" + cinema +
                 ", movie=" + movie +
-                ", showSeatList=" + showSeatList +
                 '}';
     }
 }

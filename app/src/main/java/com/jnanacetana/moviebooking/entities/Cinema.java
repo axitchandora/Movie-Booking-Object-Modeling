@@ -1,22 +1,22 @@
 package com.jnanacetana.moviebooking.entities;
 
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Cinema {
     private final String id;
     private final String name;
-    private final List<Screen> screenList;
+    private final Map<String,Screen> screenMap;
 
     public Cinema(String id, String name) {
         this.id = id;
         this.name = name;
-        this.screenList = new ArrayList<>();
+        this.screenMap = new HashMap<>();
     }
 
     public void addScreen(Screen screen){
-        screenList.add(screen);
+        screenMap.put(screen.getId(),screen);
     }
 
     public String getId() {
@@ -28,9 +28,14 @@ public class Cinema {
     }
 
     public Screen getScreenByName(String screenName){
-        return screenList.stream().filter(screen -> screenName.equals(screen.getName()))
+        return screenMap.values()
+                .stream().filter(screen -> screenName.equals(screen.getName()))
                 .findAny()
                 .orElse(null);
+    }
+
+    public Screen getScreenById(String screenId){
+        return screenMap.get(screenId);
     }
 
     @Override
@@ -42,11 +47,16 @@ public class Cinema {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
     public String toString() {
         return "Cinema{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", screenList=" + screenList +
+                ", screenMap=" + screenMap +
                 '}';
     }
 }

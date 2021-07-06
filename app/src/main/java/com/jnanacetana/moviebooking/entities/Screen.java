@@ -2,6 +2,7 @@ package com.jnanacetana.moviebooking.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Screen {
     private final String id;
@@ -37,6 +38,11 @@ public class Screen {
         if (!(o instanceof Screen)) return false;
         Screen screen = (Screen) o;
         return getId().equals(screen.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override

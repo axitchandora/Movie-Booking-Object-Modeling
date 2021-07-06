@@ -1,10 +1,12 @@
 package com.jnanacetana.moviebooking.entities;
 
+import java.util.Objects;
+
 public class Seat {
 
-    protected String id;
-    protected int seatRow;
-    protected int seatColumn;
+    private final String id;
+    private final int seatRow;
+    private final int seatColumn;
 
     public Seat(String id, int seatRow, int seatColumn) {
         this.seatRow = seatRow;
@@ -30,6 +32,11 @@ public class Seat {
         if (!(o instanceof Seat)) return false;
         Seat seat = (Seat) o;
         return getId().equals(seat.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
     @Override
