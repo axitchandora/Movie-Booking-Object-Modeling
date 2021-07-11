@@ -1,4 +1,4 @@
-package com.jnanacetana.moviebooking.entities;
+package com.moviebooking.entities;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package com.jnanacetana.moviebooking.entities;
+package com.moviebooking.entities;
 
 public enum ShowSeatStatus {
     RESERVED, UNRESERVED

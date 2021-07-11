@@ -1,27 +1,16 @@
-package com.jnanacetana.moviebooking.entities;
+package com.moviebooking.entities;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class Screen {
+public class Customer {
     private final String id;
     private final String name;
-    private final List<Seat> seatList;
+    private final String email;
 
-    public Screen(String id, String name) {
+    public Customer(String id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.seatList = new ArrayList<>();
-    }
-
-    public void addSeat(Seat seat){
-        seatList.add(seat);
-    }
-
-
-    public List<Seat> getSeatList() {
-        return seatList;
+        this.email = email;
     }
 
     public String getId() {
@@ -35,9 +24,9 @@ public class Screen {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Screen)) return false;
-        Screen screen = (Screen) o;
-        return getId().equals(screen.getId());
+        if (!(o instanceof Customer)) return false;
+        Customer customer = (Customer) o;
+        return getId().equals(customer.getId());
     }
 
     @Override
@@ -47,10 +36,10 @@ public class Screen {
 
     @Override
     public String toString() {
-        return "Screen{" +
+        return "Customer{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", seatList=" + seatList +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

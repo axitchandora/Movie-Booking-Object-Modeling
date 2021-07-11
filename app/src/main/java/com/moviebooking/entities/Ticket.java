@@ -1,4 +1,4 @@
-package com.jnanacetana.moviebooking.entities;
+package com.moviebooking.entities;
 
 import java.util.List;
 import java.util.Objects;
