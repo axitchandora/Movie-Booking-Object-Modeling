@@ -18,42 +18,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
-    public static void main(String[] args) throws NoSuchDataException {
+    public static void run(List<String> commandLineArgs){
         ApplicationConfig applicationConfig = new ApplicationConfig();
         DataLoader dataLoader = applicationConfig.getDataLoader();
         CommandInvoker commandInvoker = applicationConfig.getCommandInvoker();
+        BufferedReader reader;
 
+        String inputFile = commandLineArgs.get(0).split("=")[1];
+        commandLineArgs.remove(0);
+        for(String arg: commandLineArgs){
+            String[] splits = arg.split("=");
+            try {
+                dataLoader.executeData(splits[0],splits[1]);
+            } catch (NoSuchDataException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            String line = reader.readLine();
+            while (line != null) {
+                List<String> tokens = Arrays.asList(line.split(" "));
+                commandInvoker.executeCommand(tokens.get(0),tokens);
+                // read next line
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (IOException | NoSuchCommandException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args){
         List<String> commandLineArgs = new LinkedList<>(Arrays.asList(args));
-
         String expectedSequence = "INPUT-FILE$CINEMA-DATA$SCREEN-DATA$SEAT-DATA$CUSTOMER-DATA$MOVIE-DATA$SHOW-DATA";
         String actualSequence = commandLineArgs.stream()
                 .map(a -> a.split("=")[0])
                 .collect(Collectors.joining("$"));
-
         if(expectedSequence.equals(actualSequence)){
-            commandLineArgs.remove(0);
-            for(String arg: commandLineArgs){
-                String[] splits = arg.split("=");
-                dataLoader.executeData(splits[0],splits[1]);
-            }
-            BufferedReader reader;
-            try {
-                reader = new BufferedReader(new FileReader(args[0].split("=")[1]));
-                String line = reader.readLine();
-                while (line != null) {
-                    List<String> tokens = Arrays.asList(line.split(" "));
-                    commandInvoker.executeCommand(tokens.get(0),tokens);
-                    // read next line
-                    line = reader.readLine();
-                }
-                reader.close();
-            } catch (IOException | NoSuchCommandException e) {
-                e.printStackTrace();
-            }
+            run(commandLineArgs);
         }
     }
 }
