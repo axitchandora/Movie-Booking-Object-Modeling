@@ -19,14 +19,13 @@ repositories {
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
-
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:30.1-jre'
+    testImplementation 'org.mockito:mockito-core:2.16.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.jnanacetana.App'
+    mainClass = 'com.moviebooking.App'
 }
 
 tasks.named('test') {
