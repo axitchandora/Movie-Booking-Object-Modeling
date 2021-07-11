@@ -18,8 +18,8 @@ public class BookTicketCommand implements ICommand{
 
     @Override
     public void execute(List<String> tokens) {
-        String showId = tokens.get(1);
-        String customerName = tokens.get(2);
+        String showId = tokens.get(2);
+        String customerName = tokens.get(1);
         List<Seat> seatList = new ArrayList<>();
         for(int i=3; i< tokens.size(); i++){
            String[] words = tokens.get(i).split("#");
